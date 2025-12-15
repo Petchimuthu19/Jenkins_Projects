@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud         # Name of the Deployment
+  labels:
+    app: my-app
+spec:
+  replicas: 3                      # Desired number of Pods
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: crud-container
+        image: task1:latest     # Replace with your container image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+        - name: ENVIRONMENT
+          value: production
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
