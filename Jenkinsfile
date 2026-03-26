@@ -12,7 +12,7 @@ pipeline {
       steps {
         //Simple git clone
         git( 
-          url: 'https://github.com/Petchimuthu19/Jenkins_Projects/cst-project-1-main.git',
+          url: 'https://github.com/Petchimuthu19/Jenkins_Projects.git',
           branch: 'main'
           )
       }
