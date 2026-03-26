@@ -7,16 +7,13 @@ pipeline {
     KUBECONFIG = "kubeconfig-credentials"
   }
 
-  stages {
-    stage('Checkout Code') {
-      steps {
-        //Simple git clone
-        git( 
-          url: 'https://github.com/Petchimuthu19/Jenkins_Projects.git',
-          branch: 'main'
-          )
-      }
-    }
+  stage('Checkout Code') {
+  steps {
+    git branch: 'main',
+        url: 'https://github.com/Petchimuthu19/Jenkins_Projects.git',
+        credentialsId: 'github-creds'
+     }
+  }
 
     stage('Build Docker Image') {
       steps {
