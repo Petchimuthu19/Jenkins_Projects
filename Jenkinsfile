@@ -3,17 +3,19 @@ pipeline {
 
   environment {
     DOCKER_IMAGE = "petchimuthu1995/cred_app"
-    REGISTRY_CRED = "dockerhub-cred"
+    REGISTRY_CRED = "dockerhub-creds"
     KUBECONFIG = "kubeconfig-credentials"
   }
 
-  stage('Checkout Code') {
-  steps {
-    git branch: 'main',
-        url: 'https://github.com/Petchimuthu19/Jenkins_Projects.git',
-        credentialsId: 'github-creds'
-     }
-  }
+  stages {
+
+    stage('Checkout Code') {
+      steps {
+        git branch: 'main',
+            url: 'https://github.com/Petchimuthu19/Jenkins_Projects.git',
+            credentialsId: 'github-creds'
+      }
+    }
 
     stage('Build Docker Image') {
       steps {
@@ -37,8 +39,11 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         withCredentials([file(credentialsId: "${KUBECONFIG}", variable: 'KUBECONFIG_FILE')]) {
-          sh 'kubectl apply -f deployment.yaml'
-          sh 'kubectl apply -f service.yaml'
+          sh '''
+          export KUBECONFIG=$KUBECONFIG_FILE
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+          '''
         }
       }
     }
