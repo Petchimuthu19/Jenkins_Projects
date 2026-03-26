@@ -1,3 +1,5 @@
+def dockerImage   // ✅ GLOBAL variable
+
 pipeline {
   agent any
 
@@ -20,7 +22,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          def dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+          dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
         }
       }
     }
