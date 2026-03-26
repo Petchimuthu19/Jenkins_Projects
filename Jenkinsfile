@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     DOCKER_IMAGE = "petchimuthu1995/cred_app"
-    REGISTRY_CRED = "dockerhub-cred"
+    REGISTRY_CRED = "dockerhub_cred"
     KUBECONFIG = "kubeconfig-credentials"
   }
 
